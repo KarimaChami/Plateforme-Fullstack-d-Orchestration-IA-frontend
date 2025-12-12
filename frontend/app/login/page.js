@@ -13,8 +13,11 @@ export default function LoginPage() {
     setLoading(true);
     const res = await fetch('http://localhost:8000/login', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(loginData)
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        username: loginData.username,
+        password: loginData.password
+      })
     });
 
     if (!res.ok) {
@@ -54,14 +57,14 @@ export default function LoginPage() {
         <button
           onClick={handleLogin}
           disabled={loading}
-          className="w-full bg-gradient-to-r from-orange-400 to-pink-500 py-4 rounded-xl text-white"
+          className="w-full bg-gradient-to-r from-orange-400 to-pink-500 py-4 rounded-xl text-white cursor-pointer"
         >
           {loading ? 'Connexion...' : 'Se connecter'}
         </button>
 
         <p className="text-center mt-6 text-purple-200">
           Pas de compte ?{' '}
-          <button onClick={() => router.push('/register')} className="text-orange-400">
+          <button onClick={() => router.push('/register')} className="cursor-pointer text-orange-400">
             S’inscrire
           </button>
         </p>
