@@ -1,22 +1,11 @@
-# Node modules
-node_modules
-npm-debug.log
-yarn-error.log
+FROM node:20-alpine
 
-# Next.js build outputs
-.next
-out
+WORKDIR /app
 
-# Local environment files
-.env*
+COPY package*.json ./
 
+RUN npm install 
 
-# OS or IDE files
-.DS_Store
-.vscode/
-.idea/
-*.log
+COPY . .
 
-.git
-.gitignore
-
+CMD ["npm","run","dev"]
